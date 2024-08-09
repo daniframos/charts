@@ -28,6 +28,6 @@ volumes:
 - projected
 - secret
 users:
-- system:serviceaccount:csi-proxmox:{{ include "openshift-proxmox-csi-plugin.fullname" . }}-node
+- system:serviceaccount:{{ .Release.Namespace }}:{{ include "openshift-proxmox-csi-plugin.serviceAccountName" . }}-node
 seccompProfiles:
 - runtime/default
