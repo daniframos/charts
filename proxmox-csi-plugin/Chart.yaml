@@ -1,0 +1,16 @@
+apiVersion: v2
+appVersion: v0.7.0
+description: A CSI plugin for Proxmox
+home: https://github.com/daniframos/proxmox-csi-plugin
+keywords:
+- storage
+- block-storage
+- volume
+maintainers:
+- name: daniframos
+  url: https://github.com/daniframos
+name: openshift-proxmox-csi-plugin
+sources:
+- https://github.com/daniframos/charts
+type: application
+version: 0.0.1

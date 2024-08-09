@@ -1,0 +1,33 @@
+apiVersion: security.openshift.io/v1
+kind: SecurityContextConstraints
+metadata:
+  namespace: {{ .Release.Namespace }}
+  name: {{ include "proxmox-csi-plugin.fullname" . }}-scc
+  labels:
+    {{- include "proxmox-csi-plugin.labels" . | nindent 4 }}
+allowHostDirVolumePlugin: true
+allowPrivilegedContainer: true
+allowedCapabilities:
+- SYS_ADMIN
+- CHOWN
+- DAC_OVERRIDE
+seLinuxContext:
+  type: MustRunAs
+runAsUser:
+  type: RunAsAny
+supplementalGroups:
+  type: RunAsAny
+fsGroup:
+  type: RunAsAny
+volumes:
+- configMap
+- downwardAPI
+- emptyDir
+- hostPath
+- persistentVolumeClaim
+- projected
+- secret
+users:
+- system:serviceaccount:csi-proxmox:{{ include "proxmox-csi-plugin.fullname" . }}-node
+seccompProfiles:
+- runtime/default
