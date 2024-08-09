@@ -1,10 +1,10 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "proxmox-csi-plugin.fullname" . }}-controller
+  name: {{ include "openshift-proxmox-csi-plugin.fullname" . }}-controller
   namespace: {{ .Release.Namespace }}
   labels:
-    {{- include "proxmox-csi-plugin.labels" . | nindent 4 }}
+    {{- include "openshift-proxmox-csi-plugin.labels" . | nindent 4 }}
 spec:
   replicas: {{ .Values.replicaCount }}
   strategy:
@@ -13,7 +13,7 @@ spec:
       {{- toYaml .Values.updateStrategy.rollingUpdate | nindent 6 }}
   selector:
     matchLabels:
-      {{- include "proxmox-csi-plugin.selectorLabels" . | nindent 6 }}
+      {{- include "openshift-proxmox-csi-plugin.selectorLabels" . | nindent 6 }}
   template:
     metadata:
       annotations:
@@ -22,7 +22,7 @@ spec:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       labels:
-        {{- include "proxmox-csi-plugin.selectorLabels" . | nindent 8 }}
+        {{- include "openshift-proxmox-csi-plugin.selectorLabels" . | nindent 8 }}
     spec:
       {{- if .Values.priorityClassName }}
       priorityClassName: {{ .Values.priorityClassName }}
@@ -32,11 +32,11 @@ spec:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       enableServiceLinks: false
-      serviceAccountName: {{ include "proxmox-csi-plugin.serviceAccountName" . }}-controller
+      serviceAccountName: {{ include "openshift-proxmox-csi-plugin.serviceAccountName" . }}-controller
       hostAliases: {{- toYaml .Values.hostAliases | nindent 8 }}
       initContainers: {{- toYaml .Values.initContainers | nindent 8 }}
       containers:
-        - name: {{ include "proxmox-csi-plugin.fullname" . }}-controller
+        - name: {{ include "openshift-proxmox-csi-plugin.fullname" . }}-controller
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.controller.plugin.image.repository }}:{{ .Values.controller.plugin.image.tag | default .Chart.AppVersion }}"
@@ -137,7 +137,7 @@ spec:
         {{- else }}
         - name: cloud-config
           secret:
-            secretName: {{ include "proxmox-csi-plugin.fullname" . }}
+            secretName: {{ include "openshift-proxmox-csi-plugin.fullname" . }}
         {{- end }}
         {{- with .Values.extraVolumes }}
         {{- toYaml . | nindent 8 }}
@@ -160,4 +160,4 @@ spec:
           whenUnsatisfiable: DoNotSchedule
           labelSelector:
             matchLabels:
-              {{- include "proxmox-csi-plugin.selectorLabels" . | nindent 14 }}
+              {{- include "openshift-proxmox-csi-plugin.selectorLabels" . | nindent 14 }}

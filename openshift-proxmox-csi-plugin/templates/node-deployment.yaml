@@ -1,10 +1,10 @@
 apiVersion: apps/v1
 kind: DaemonSet
 metadata:
-  name: {{ include "proxmox-csi-plugin.fullname" . }}-node
+  name: {{ include "openshift-proxmox-csi-plugin.fullname" . }}-node
   namespace: {{ .Release.Namespace }}
   labels:
-    {{- include "proxmox-csi-plugin.labels" . | nindent 4 }}
+    {{- include "openshift-proxmox-csi-plugin.labels" . | nindent 4 }}
 spec:
   updateStrategy:
     type: {{ .Values.updateStrategy.type }}
@@ -26,12 +26,12 @@ spec:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       enableServiceLinks: false
-      serviceAccountName: {{ include "proxmox-csi-plugin.serviceAccountName" . }}-node
+      serviceAccountName: {{ include "openshift-proxmox-csi-plugin.serviceAccountName" . }}-node
       securityContext:
         runAsUser: 0
         runAsGroup: 0
       containers:
-        - name: {{ include "proxmox-csi-plugin.fullname" . }}-node
+        - name: {{ include "openshift-proxmox-csi-plugin.fullname" . }}-node
           securityContext:
             privileged: true
             capabilities:

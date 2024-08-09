@@ -2,9 +2,9 @@ apiVersion: security.openshift.io/v1
 kind: SecurityContextConstraints
 metadata:
   namespace: {{ .Release.Namespace }}
-  name: {{ include "proxmox-csi-plugin.fullname" . }}-scc
+  name: {{ include "openshift-proxmox-csi-plugin.fullname" . }}-scc
   labels:
-    {{- include "proxmox-csi-plugin.labels" . | nindent 4 }}
+    {{- include "openshift-proxmox-csi-plugin.labels" . | nindent 4 }}
 allowHostDirVolumePlugin: true
 allowPrivilegedContainer: true
 allowedCapabilities:
@@ -28,6 +28,6 @@ volumes:
 - projected
 - secret
 users:
-- system:serviceaccount:csi-proxmox:{{ include "proxmox-csi-plugin.fullname" . }}-node
+- system:serviceaccount:csi-proxmox:{{ include "openshift-proxmox-csi-plugin.fullname" . }}-node
 seccompProfiles:
 - runtime/default
