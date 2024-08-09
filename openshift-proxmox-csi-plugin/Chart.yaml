@@ -13,4 +13,4 @@ name: openshift-proxmox-csi-plugin
 sources:
 - https://github.com/daniframos/charts/tree/master/openshift-proxmox-csi-plugin
 type: application
-version: 0.0.1
+version: 0.0.3
