@@ -1,16 +1,16 @@
 kind: ConfigMap
 apiVersion: v1
 metadata:
-  name: {{ include "nexus.fullname" . }}-config
+  name: {{ include "prometheus.fullname" . }}-config
   namespace: {{ .Release.Namespace }}
   labels:
-    {{- include "nexus.labels" . | nindent 4 }}
+    {{- include "prometheus.labels" . | nindent 4 }}
 data:
-  nexus.yml: |
+  prometheus.yml: |
     global:
       scrape_interval: 10s
       external_labels:
-        system: quarkus-super-heroes
+        system: prometheus
     scrape_configs:
       - job_name: k8s-discovery
         kubernetes_sd_configs:
@@ -19,17 +19,17 @@ data:
               own_namespace: true
         relabel_configs:
           - source_labels:
-              - __meta_kubernetes_pod_annotation_nexus_io_scrape
+              - __meta_kubernetes_pod_annotation_prometheus_io_scrape
             action: keep
             regex: true
           - source_labels:
-              - __meta_kubernetes_pod_annotation_nexus_io_path
+              - __meta_kubernetes_pod_annotation_prometheus_io_path
             action: replace
             target_label: __metrics_path__
             regex: (.+)
           - source_labels:
               - __address__
-              - __meta_kubernetes_pod_annotation_nexus_io_port
+              - __meta_kubernetes_pod_annotation_prometheus_io_port
             action: replace
             regex: ([^:]+)(?::\d+)?;(\d+)
             replacement: $1:$2
