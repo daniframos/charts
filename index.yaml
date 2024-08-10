@@ -3,9 +3,9 @@ entries:
   grafana:
   - apiVersion: v2
     appVersion: v0.0.1
-    created: "2024-08-10T19:21:45.3297727-03:00"
+    created: "2024-08-10T19:35:43.5705023-03:00"
     description: Chart para grafana
-    digest: 99f95656bc205586423a6735f7adf424b4d79eac3aec4cd5d4bcfe16c576d41f
+    digest: 034f02808d3cacdcffa48b5e6f2b851a513239e45fffbc44a70357a919b35889
     home: https://github.com/daniframos/charts/tree/master/grafana
     keywords:
     - monitoring
@@ -22,9 +22,9 @@ entries:
   nexus:
   - apiVersion: v2
     appVersion: v0.0.1
-    created: "2024-08-10T19:21:45.3297727-03:00"
+    created: "2024-08-10T19:35:43.57102-03:00"
     description: Chart para nexus com storage no proxmox
-    digest: d8bd8ae45f2e4bd2524d2fa9ff5b13c19f96736cba9e487d341d9925bb45fabf
+    digest: a9ff78a832ab0a2b087f9dc8d23aadb1d96c9abc32fecbebc22c90b07c807eaa
     home: https://github.com/daniframos/charts/tree/master/nexus
     keywords:
     - monitoring
@@ -41,9 +41,9 @@ entries:
   openshift-proxmox-csi-plugin:
   - apiVersion: v2
     appVersion: v0.0.1
-    created: "2024-08-10T19:21:45.3302928-03:00"
+    created: "2024-08-10T19:35:43.5715397-03:00"
     description: A CSI plugin for Proxmox + Openshift
-    digest: 5b3270a046f334faa5491bb56fe359b3f25fa09106f3351217c07f1d5d5cfe7e
+    digest: 1fbe29d07d9cd080c16558e73a6aa04047946326b68c574d09dfc1223f9bd137
     home: https://github.com/daniframos/charts/tree/master/openshift-proxmox-csi-plugin
     keywords:
     - storage
@@ -62,9 +62,9 @@ entries:
   prometheus:
   - apiVersion: v2
     appVersion: v0.0.1
-    created: "2024-08-10T19:21:45.3302928-03:00"
+    created: "2024-08-10T19:35:43.5715397-03:00"
     description: Chart básico para prometheus e storage no proxmos
-    digest: 67822f7dc2d90b4596856aac6ab61124c2a1a90477053e6d36213cbd6903b927
+    digest: 85d243b9ae549fcbad5f56668e5ad05d0d9d771925041fcb1ecf4a7b2a9ff779
     home: https://github.com/daniframos/charts/tree/master/prometheus
     keywords:
     - monitoring
@@ -78,4 +78,4 @@ entries:
     urls:
     - prometheus-0.0.1.tgz
     version: 0.0.1
-generated: "2024-08-10T19:21:45.3292261-03:00"
+generated: "2024-08-10T19:35:43.5699886-03:00"
