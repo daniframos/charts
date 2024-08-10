@@ -20,7 +20,7 @@ deployment:
       path: /
       port: 8081
       scheme: HTTP
-    initialDelaySeconds: 30
+    initialDelaySeconds: 60
     periodSeconds: 10
     successThreshold: 1
     timeoutSeconds: 120
@@ -31,7 +31,7 @@ deployment:
       path: /
       port: 8081
       scheme: HTTP
-    initialDelaySeconds: 30
+    initialDelaySeconds: 60
     periodSeconds: 10
     successThreshold: 1
     timeoutSeconds: 120
