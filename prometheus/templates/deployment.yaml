@@ -8,9 +8,9 @@ metadata:
 spec:
 replicas: {{ .Values.replicaCount }}
 strategy:
-  type: {{ .Values.updateStrategy.type }}
+  type: {{ .Values.deployment.updateStrategy.type }}
   rollingUpdate:
-    {{- toYaml .Values.updateStrategy.rollingUpdate | nindent 6 }}
+    {{- toYaml .Values.deployment.updateStrategy.rollingUpdate | nindent 6 }}
 selector:
   matchLabels:
     {{- include "prometheus.selectorLabels" . | nindent 6 }}

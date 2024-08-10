@@ -1,7 +1,13 @@
 nameOverride: ""
 fullnameOverride: ""
 
+
 deployment:
+  updateStrategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+
   image:
     repository: prom/prometheus
     pullPolicy: IfNotPresent
