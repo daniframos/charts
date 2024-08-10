@@ -1,3 +1,43 @@
 apiVersion: v1
-entries: {}
-generated: "2024-08-10T16:08:55.8170115-03:00"
+entries:
+  openshift-proxmox-csi-plugin:
+  - apiVersion: v2
+    appVersion: v0.0.1
+    created: "2024-08-10T16:29:06.1569042-03:00"
+    description: A CSI plugin for Proxmox + Openshift
+    digest: eed44894650d0313b6f9c45b7862b3b1298cab517508991e6b0cb626ecd3c699
+    home: https://github.com/daniframos/charts/tree/master/openshift-proxmox-csi-plugin
+    keywords:
+    - storage
+    - block-storage
+    - volume
+    maintainers:
+    - name: daniframos
+      url: https://github.com/daniframos
+    name: openshift-proxmox-csi-plugin
+    sources:
+    - https://github.com/daniframos/charts/tree/master/openshift-proxmox-csi-plugin
+    type: application
+    urls:
+    - openshift-proxmox-csi-plugin-0.0.1.tgz
+    version: 0.0.1
+  prometheus:
+  - apiVersion: v2
+    appVersion: v0.0.1
+    created: "2024-08-10T16:29:06.1569042-03:00"
+    description: Chart para prometheus
+    digest: 645c3237c224b9b093607c4215dfc3c16bd3812b209b33252efdd6b9b34122ae
+    home: https://github.com/daniframos/charts/tree/master/prometheus
+    keywords:
+    - monitoring
+    maintainers:
+    - name: daniframos
+      url: https://github.com/daniframos
+    name: prometheus
+    sources:
+    - https://github.com/daniframos/charts/tree/master/prometheus
+    type: application
+    urls:
+    - prometheus-0.0.1.tgz
+    version: 0.0.1
+generated: "2024-08-10T16:29:06.1558817-03:00"
