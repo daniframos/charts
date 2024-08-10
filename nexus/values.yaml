@@ -3,23 +3,24 @@ fullnameOverride: ""
 
 
 deployment:
+  replicaCount: 1
   updateStrategy:
     type: RollingUpdate
     rollingUpdate:
       maxUnavailable: 1
 
   image:
-    repository: prom/prometheus
+    repository: sonatype/nexus3
     pullPolicy: IfNotPresent
-    tag: "v2.43.0"
+    tag: "3.71.0-ubi"
 
   livenessProbe:
     failureThreshold: 3
     httpGet:
       path: /
-      port: 9090
+      port: 8081
       scheme: HTTP
-    initialDelaySeconds: 5
+    initialDelaySeconds: 30
     periodSeconds: 10
     successThreshold: 1
     timeoutSeconds: 120
@@ -28,14 +29,15 @@ deployment:
     failureThreshold: 3
     httpGet:
       path: /
-      port: 9090
+      port: 8081
       scheme: HTTP
-    initialDelaySeconds: 5
+    initialDelaySeconds: 30
     periodSeconds: 10
     successThreshold: 1
     timeoutSeconds: 120
 
-  port: 9090
+  port: 8081
+  dockerPort: 8082
 
 storage:
   size: 10Gi
@@ -43,3 +45,6 @@ storage:
 
 openshift:
   dominio: apps.ocp.dani.framos.nom.br
+
+
+config: []

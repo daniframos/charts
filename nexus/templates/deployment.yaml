@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "nexus.fullname" . }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "nexus.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.deployment.replicaCount }}
+  strategy:
+    type: {{ .Values.deployment.updateStrategy.type }}
+    rollingUpdate:
+      {{- toYaml .Values.deployment.updateStrategy.rollingUpdate | nindent 6 }}
+  selector:
+    matchLabels:
+      {{- include "nexus.selectorLabels" . | nindent 6 }}
+    strategy:
+      type: Recreate
+  template:
+    metadata:
+      annotations:
+        checksum/config: {{ toJson .Values.config | sha256sum }}
+      labels:
+        {{- include "nexus.selectorLabels" . | nindent 8 }}
+    spec:
+      containers:
+      - image: "{{ .Values.deployment.image.repository }}:{{ .Values.deployment.image.tag }}"
+        imagePullPolicy: {{ .Values.deployment.image.pullPolicy }}
+        livenessProbe: {{ toYaml .Values.deployment.livenessProbe | nindent 12 }}
+        name: {{ include "nexus.name" . }}
+        ports:
+        - containerPort: {{ .Values.deployment.port }}
+          name: tcp-{{ .Values.deployment.port }}
+          protocol: TCP
+        readinessProbe: {{ toYaml .Values.deployment.readinessProbe | nindent 12 }}
+        resources: {}
+        volumeMounts:
+        - mountPath: /nexus
+          name: nexus-data
+        - mountPath: /nexus-data
+          name: {{ include "nexus.fullname" . }}-config
+      volumes:
+      - name: nexus-data
+        persistentVolumeClaim:
+          claimName: {{ include "nexus.fullname" . }}-pvc
+      - configMap:
+          defaultMode: 420
+          name: {{ include "nexus.fullname" . }}-config
+        name: {{ include "nexus.fullname" . }}-config

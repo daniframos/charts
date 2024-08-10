@@ -1,0 +1,21 @@
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: gestao-{{ include "nexus.fullname" . }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "nexus.labels" . | nindent 4 }}
+labels:
+  {{- include "nexus.labels" . | nindent 4 }}
+spec:
+  host: gestao-{{ include "nexus.fullname" . }}.{{ .Values.openshift.dominio }}
+  port:
+    targetPort: {{ .Values.deployment.port }}
+  tls:
+    insecureEdgeTerminationPolicy: Allow
+    termination: edge
+  to:
+    kind: Service
+    name: {{ include "nexus.fullname" . }}
+    weight: 100
+  wildcardPolicy: None

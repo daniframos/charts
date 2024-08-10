@@ -1,0 +1,21 @@
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: {{ include "nexus.fullname" . }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "nexus.labels" . | nindent 4 }}
+labels:
+  {{- include "nexus.labels" . | nindent 4 }}
+spec:
+  host: {{ include "nexus.fullname" . }}.{{ .Values.openshift.dominio }}
+  port:
+    targetPort: {{ .Values.deployment.dockerPort }}
+  tls:
+    insecureEdgeTerminationPolicy: Allow
+    termination: edge
+  to:
+    kind: Service
+    name: {{ include "nexus.fullname" . }}
+    weight: 100
+  wildcardPolicy: None

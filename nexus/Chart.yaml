@@ -1,0 +1,14 @@
+apiVersion: v2
+appVersion: v0.0.1
+version: 0.0.1
+description: Chart para nexus
+home: https://github.com/daniframos/charts/tree/master/nexus
+keywords:
+- monitoring
+maintainers:
+- name: daniframos
+  url: https://github.com/daniframos
+name: nexus
+sources:
+- https://github.com/daniframos/charts/tree/master/nexus
+type: application
