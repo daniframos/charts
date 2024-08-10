@@ -3,6 +3,7 @@ fullnameOverride: ""
 
 
 deployment:
+  replicaCount: 1
   updateStrategy:
     type: RollingUpdate
     rollingUpdate:

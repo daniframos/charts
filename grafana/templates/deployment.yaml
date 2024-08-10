@@ -6,7 +6,7 @@ metadata:
   labels:
     {{- include "grafana.labels" . | nindent 4 }}
 spec:
-  replicas: {{ .Values.replicaCount }}
+  replicas: {{ .Values.deployment.replicaCount }}
   strategy:
     type: {{ .Values.deployment.updateStrategy.type }}
     rollingUpdate:
@@ -14,12 +14,8 @@ spec:
   selector:
     matchLabels:
       {{- include "grafana.selectorLabels" . | nindent 6 }}
-    strategy:
-      type: Recreate
   template:
     metadata:
-      annotations:
-        checksum/config: {{ toJson .Values.config | sha256sum }}
       labels:
         {{- include "grafana.selectorLabels" . | nindent 8 }}
     spec:
