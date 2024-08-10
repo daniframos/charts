@@ -41,4 +41,4 @@ spec:
       - name: grafana-data
         persistentVolumeClaim:
           claimName: {{ include "grafana.fullname" . }}-pvc
-        name: {{ include "grafana.fullname" . }}-config
+        name: {{ include "grafana.fullname" . }}-data
