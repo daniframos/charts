@@ -7,11 +7,11 @@ metadata:
     {{- include "prometheus.labels" . | nindent 4 }}
 spec:
   ports:
-  - name: TCP
+  - name: tcp-{{ .Values.deployment.port }}
     port: {{ .Values.deployment.port }}
     protocol: TCP
     targetPort: {{ .Values.deployment.port }}
   selector:
-    deployment: {{ include "prometheus.fullname" . }}
+    {{- include "prometheus.selectorLabels" . | nindent 6 }}
   sessionAffinity: None
   type: ClusterIP

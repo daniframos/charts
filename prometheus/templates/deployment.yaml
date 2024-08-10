@@ -6,34 +6,31 @@ metadata:
   labels:
     {{- include "prometheus.labels" . | nindent 4 }}
 spec:
-replicas: {{ .Values.replicaCount }}
-strategy:
-  type: {{ .Values.deployment.updateStrategy.type }}
-  rollingUpdate:
-    {{- toYaml .Values.deployment.updateStrategy.rollingUpdate | nindent 6 }}
-selector:
-  matchLabels:
-    {{- include "prometheus.selectorLabels" . | nindent 6 }}
+  replicas: {{ .Values.replicaCount }}
   strategy:
-    type: Recreate
+    type: {{ .Values.deployment.updateStrategy.type }}
+    rollingUpdate:
+      {{- toYaml .Values.deployment.updateStrategy.rollingUpdate | nindent 6 }}
+  selector:
+    matchLabels:
+      {{- include "prometheus.selectorLabels" . | nindent 6 }}
+    strategy:
+      type: Recreate
   template:
-  metadata:
-    annotations:
-      checksum/config: {{ toJson .Values.config | sha256sum }}
-    {{- with .Values.podAnnotations }}
-      {{- toYaml . | nindent 8 }}
-    {{- end }}
-    labels:
-      {{- include "prometheus.selectorLabels" . | nindent 8 }}
+    metadata:
+      annotations:
+        checksum/config: {{ toJson .Values.config | sha256sum }}
+      labels:
+        {{- include "prometheus.selectorLabels" . | nindent 8 }}
     spec:
       containers:
-      - image: "{{ .Values.deployment.image.repository }}:{{ .Values.controller.plugin.image.tag | default .Chart.AppVersion }}"
+      - image: "{{ .Values.deployment.image.repository }}:{{ .Values.deployment.image.tag }}"
         imagePullPolicy: {{ .Values.deployment.image.pullPolicy }}
         livenessProbe: {{ toYaml .Values.deployment.livenessProbe | nindent 12 }}
         name: {{ include "prometheus.name" . }}
         ports:
         - containerPort: {{ .Values.deployment.port }}
-          name: tcp-{{ .Values.deployment.image.pullPolicy }}
+          name: tcp-{{ .Values.deployment.port }}
           protocol: TCP
         readinessProbe: {{ toYaml .Values.deployment.readinessProbe | nindent 12 }}
         resources: {}

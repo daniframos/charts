@@ -37,6 +37,7 @@ Common labels
 helm.sh/chart: {{ include "prometheus.chart" . }}
 app.kubernetes.io/name: {{ include "prometheus.name" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
+app: {{ .Release.name }}
 {{- if .Chart.AppVersion }}
 app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
 {{- end }}
