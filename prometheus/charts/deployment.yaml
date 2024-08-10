@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "prometheus.fullname" . }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "prometheus.labels" . | nindent 4 }}
+spec:
+replicas: {{ .Values.replicaCount }}
+strategy:
+  type: {{ .Values.updateStrategy.type }}
+  rollingUpdate:
+    {{- toYaml .Values.updateStrategy.rollingUpdate | nindent 6 }}
+selector:
+  matchLabels:
+    {{- include "prometheus.selectorLabels" . | nindent 6 }}
+  strategy:
+    type: Recreate
+  template:
+  metadata:
+    annotations:
+      checksum/config: {{ toJson .Values.config | sha256sum }}
+    {{- with .Values.podAnnotations }}
+      {{- toYaml . | nindent 8 }}
+    {{- end }}
+    labels:
+      {{- include "prometheus.selectorLabels" . | nindent 8 }}
+    spec:
+      containers:
+      - image: "{{ .Values.deployment.image.repository }}:{{ .Values.controller.plugin.image.tag | default .Chart.AppVersion }}"
+        imagePullPolicy: {{ .Values.deployment.image.pullPolicy }}
+        livenessProbe: {{ toYaml .Values.deployment.livenessProbe | nindent 12 }}
+        name: {{ include "prometheus.name" . }}
+        ports:
+        - containerPort: {{ .Values.deployment.port }}
+          name: tcp-{{ .Values.deployment.image.pullPolicy }}
+          protocol: TCP
+        readinessProbe: {{ toYaml .Values.deployment.readinessProbe | nindent 12 }}
+        resources: {}
+        volumeMounts:
+        - mountPath: /prometheus
+          name: prometheus-data
+        - mountPath: /etc/prometheus
+          name: {{ include "prometheus.fullname" . }}-config
+      volumes:
+      - name: prometheus-data
+        persistentVolumeClaim:
+          claimName: {{ include "prometheus.fullname" . }}-pvc
+      - configMap:
+          defaultMode: 420
+          name: {{ include "prometheus.fullname" . }}-config
+        name: {{ include "prometheus.fullname" . }}-config

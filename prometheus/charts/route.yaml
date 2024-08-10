@@ -1,0 +1,21 @@
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: {{ include "prometheus.fullname" . }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "prometheus.labels" . | nindent 4 }}
+labels:
+  {{- include "prometheus.labels" . | nindent 4 }}
+spec:
+  host: {{ include "prometheus.fullname" . }}.{{ .Values.openshift.dominio }}
+  port:
+    targetPort: {{ .Values.deployment.port }}
+  tls:
+    insecureEdgeTerminationPolicy: Allow
+    termination: edge
+  to:
+    kind: Service
+    name: {{ include "prometheus.fullname" . }}
+    weight: 100
+  wildcardPolicy: None

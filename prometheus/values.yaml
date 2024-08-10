@@ -1,0 +1,40 @@
+nameOverride: ""
+fullnameOverride: ""
+
+deployment:
+  image:
+    repository: prom/prometheus
+    pullPolicy: IfNotPresent
+    tag: "v2.43.0"
+    pullPolicy: IfNotPresent
+
+  livenessProbe:
+    failureThreshold: 3
+    httpGet:
+      path: /
+      port: 9090
+      scheme: HTTP
+    initialDelaySeconds: 5
+    periodSeconds: 10
+    successThreshold: 1
+    timeoutSeconds: 120
+
+  readinessProbe:
+    failureThreshold: 3
+    httpGet:
+      path: /
+      port: 9090
+      scheme: HTTP
+    initialDelaySeconds: 5
+    periodSeconds: 10
+    successThreshold: 1
+    timeoutSeconds: 120
+
+  port: 9090
+
+storage:
+  size: 10Gi
+  storageClass: proxmox-data-xfs
+
+openshift:
+  dominio: apps.ocp.dani.framos.nom.br
