@@ -37,7 +37,7 @@ Common labels
 helm.sh/chart: {{ include "nexus.chart" . }}
 app.kubernetes.io/name: {{ include "nexus.name" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
-app: {{ .Release.name }}
+app: {{ include "nexus.name" . }}
 {{- if .Chart.AppVersion }}
 app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
 {{- end }}

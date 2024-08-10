@@ -37,7 +37,7 @@ Common labels
 helm.sh/chart: {{ include "grafana.chart" . }}
 app.kubernetes.io/name: {{ include "grafana.name" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
-app: {{ .Release.name }}
+app: {{ include "grafana.name" . }}
 {{- if .Chart.AppVersion }}
 app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
 {{- end }}
