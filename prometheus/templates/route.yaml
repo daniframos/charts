@@ -5,8 +5,6 @@ metadata:
   namespace: {{ .Release.Namespace }}
   labels:
     {{- include "prometheus.labels" . | nindent 4 }}
-labels:
-  {{- include "prometheus.labels" . | nindent 4 }}
 spec:
   host: {{ include "prometheus.fullname" . }}.{{ .Values.openshift.dominio }}
   port:
