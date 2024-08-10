@@ -1,7 +1,7 @@
 apiVersion: v2
 appVersion: v0.0.1
 version: 0.0.1
-description: Chart para nexus
+description: Chart para nexus com storage no proxmox
 home: https://github.com/daniframos/charts/tree/master/nexus
 keywords:
 - monitoring
