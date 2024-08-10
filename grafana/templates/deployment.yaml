@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "grafana.fullname" . }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "grafana.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  strategy:
+    type: {{ .Values.deployment.updateStrategy.type }}
+    rollingUpdate:
+      {{- toYaml .Values.deployment.updateStrategy.rollingUpdate | nindent 6 }}
+  selector:
+    matchLabels:
+      {{- include "grafana.selectorLabels" . | nindent 6 }}
+    strategy:
+      type: Recreate
+  template:
+    metadata:
+      annotations:
+        checksum/config: {{ toJson .Values.config | sha256sum }}
+      labels:
+        {{- include "grafana.selectorLabels" . | nindent 8 }}
+    spec:
+      containers:
+      - image: "{{ .Values.deployment.image.repository }}:{{ .Values.deployment.image.tag }}"
+        imagePullPolicy: {{ .Values.deployment.image.pullPolicy }}
+        livenessProbe: {{ toYaml .Values.deployment.livenessProbe | nindent 12 }}
+        name: {{ include "grafana.name" . }}
+        ports:
+        - containerPort: {{ .Values.deployment.port }}
+          name: tcp-{{ .Values.deployment.port }}
+          protocol: TCP
+        readinessProbe: {{ toYaml .Values.deployment.readinessProbe | nindent 12 }}
+        resources: {}
+        volumeMounts:
+        - mountPath: /var/lib/grafana
+          name: grafana-data
+      volumes:
+      - name: grafana-data
+        persistentVolumeClaim:
+          claimName: {{ include "grafana.fullname" . }}-pvc
+        name: {{ include "grafana.fullname" . }}-config

@@ -1,0 +1,21 @@
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: {{ include "grafana.fullname" . }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "grafana.labels" . | nindent 4 }}
+labels:
+  {{- include "grafana.labels" . | nindent 4 }}
+spec:
+  host: {{ include "grafana.fullname" . }}.{{ .Values.openshift.dominio }}
+  port:
+    targetPort: {{ .Values.deployment.port }}
+  tls:
+    insecureEdgeTerminationPolicy: Allow
+    termination: edge
+  to:
+    kind: Service
+    name: {{ include "grafana.fullname" . }}
+    weight: 100
+  wildcardPolicy: None

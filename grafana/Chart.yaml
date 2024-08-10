@@ -1,0 +1,14 @@
+apiVersion: v2
+appVersion: v0.0.1
+version: 0.0.1
+description: Chart para grafana
+home: https://github.com/daniframos/charts/tree/master/grafana
+keywords:
+- monitoring
+maintainers:
+- name: daniframos
+  url: https://github.com/daniframos
+name: grafana
+sources:
+- https://github.com/daniframos/charts/tree/master/grafana
+type: application
