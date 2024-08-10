@@ -1,7 +1,16 @@
+# Chama a função automaticamente se o script for executado com o parâmetro versao
+param (
+    [string]$versao
+)
+
+if ($versao) {
+    Nova-Versao -versao $versao
+}
+
 function Nova-Versao([string]$versao) {
-    Invoke-Expression -Command "helm package .\grafana\ --version $versao"
-    Invoke-Expression -Command "helm package .\nexus\ --version $versao"
-    Invoke-Expression -Command "helm package .\openshift-proxmox-csi-plugin\ --version $versao"
-    Invoke-Expression -Command "helm package .\prometheus\ --version $versao"
-    Invoke-Expression -Command "helm repo index --merge index.yaml ."
+    helm package .\grafana\ --version $versao
+    helm package .\nexus\ --version $versao
+    helm package .\openshift-proxmox-csi-plugin\ --version $versao
+    helm package .\prometheus\ --version $versao
+    helm repo index --merge index.yaml .
 }

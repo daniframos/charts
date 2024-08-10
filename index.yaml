@@ -1,0 +1,81 @@
+apiVersion: v1
+entries:
+  grafana:
+  - apiVersion: v2
+    appVersion: v0.0.1
+    created: "2024-08-10T19:11:46.0916278-03:00"
+    description: Chart para grafana
+    digest: 18149e5efa31868eb2c546d4cf9684de8b7d2f0f154583fbcb61b4ef327993eb
+    home: https://github.com/daniframos/charts/tree/master/grafana
+    keywords:
+    - monitoring
+    maintainers:
+    - name: daniframos
+      url: https://github.com/daniframos
+    name: grafana
+    sources:
+    - https://github.com/daniframos/charts/tree/master/grafana
+    type: application
+    urls:
+    - grafana-0.0.1.tgz
+    version: 0.0.1
+  nexus:
+  - apiVersion: v2
+    appVersion: v0.0.1
+    created: "2024-08-10T19:11:46.0921559-03:00"
+    description: Chart para nexus com storage no proxmox
+    digest: 8bba500d706d54cdac658ced289eccff742502cd0a2b8d51977a971476338b23
+    home: https://github.com/daniframos/charts/tree/master/nexus
+    keywords:
+    - monitoring
+    maintainers:
+    - name: daniframos
+      url: https://github.com/daniframos
+    name: nexus
+    sources:
+    - https://github.com/daniframos/charts/tree/master/nexus
+    type: application
+    urls:
+    - nexus-0.0.1.tgz
+    version: 0.0.1
+  openshift-proxmox-csi-plugin:
+  - apiVersion: v2
+    appVersion: v0.0.1
+    created: "2024-08-10T19:11:46.0927032-03:00"
+    description: A CSI plugin for Proxmox + Openshift
+    digest: 06fe1ab78139a33a020e21b1868f7dd2757ef8b4a71633eab893d484b38552b0
+    home: https://github.com/daniframos/charts/tree/master/openshift-proxmox-csi-plugin
+    keywords:
+    - storage
+    - block-storage
+    - volume
+    maintainers:
+    - name: daniframos
+      url: https://github.com/daniframos
+    name: openshift-proxmox-csi-plugin
+    sources:
+    - https://github.com/daniframos/charts/tree/master/openshift-proxmox-csi-plugin
+    type: application
+    urls:
+    - openshift-proxmox-csi-plugin-0.0.1.tgz
+    version: 0.0.1
+  prometheus:
+  - apiVersion: v2
+    appVersion: v0.0.1
+    created: "2024-08-10T19:11:46.0932161-03:00"
+    description: Chart básico para prometheus e storage no proxmos
+    digest: cb7ceab2826e34fedb9e13f4e40282960283900e21f7c780eb9fab5ba7225a17
+    home: https://github.com/daniframos/charts/tree/master/prometheus
+    keywords:
+    - monitoring
+    maintainers:
+    - name: daniframos
+      url: https://github.com/daniframos
+    name: prometheus
+    sources:
+    - https://github.com/daniframos/charts/tree/master/prometheus
+    type: application
+    urls:
+    - prometheus-0.0.1.tgz
+    version: 0.0.1
+generated: "2024-08-10T19:11:46.0911045-03:00"
